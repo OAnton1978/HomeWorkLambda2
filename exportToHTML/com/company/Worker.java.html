@@ -21,8 +21,9 @@ Worker.java</font>
     <span class="s0">private </span><span class="s1">OnTaskDoneListener callback</span><span class="s0">;</span>
     <span class="s0">private </span><span class="s1">OnTaskErrorListener errorCallback</span><span class="s0">;</span>
 
-    <span class="s0">public </span><span class="s1">Worker(OnTaskDoneListener callback) {</span>
+    <span class="s0">public </span><span class="s1">Worker(OnTaskDoneListener callback</span><span class="s0">, </span><span class="s1">OnTaskErrorListener errorCallback) {</span>
         <span class="s0">this</span><span class="s1">.callback = callback</span><span class="s0">;</span>
+        <span class="s0">this</span><span class="s1">.errorCallback = errorCallback</span><span class="s0">;</span>
     <span class="s1">}</span>
 
     <span class="s0">public </span><span class="s1">Worker(OnTaskErrorListener errorCallback) {</span>
@@ -30,16 +31,13 @@ Worker.java</font>
     <span class="s1">}</span>
 
     <span class="s0">public void </span><span class="s1">start() {</span>
-        <span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s2">0</span><span class="s0">; </span><span class="s1">i &lt; </span><span class="s2">33</span><span class="s0">; </span><span class="s1">i++) {</span>
-            <span class="s1">callback.onDone(</span><span class="s3">&quot;Task &quot; </span><span class="s1">+ i + </span><span class="s3">&quot; is done&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s2">0</span><span class="s0">; </span><span class="s1">i &lt; </span><span class="s2">100</span><span class="s0">; </span><span class="s1">i++) {</span>
+            <span class="s0">if </span><span class="s1">(i == </span><span class="s2">33</span><span class="s1">) {</span>
+                <span class="s1">errorCallback.onError(</span><span class="s3">&quot;Task &quot; </span><span class="s1">+ i + </span><span class="s3">&quot; is Error&quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">} </span><span class="s0">else </span><span class="s1">{</span>
+                <span class="s1">callback.onDone(</span><span class="s3">&quot;Task &quot; </span><span class="s1">+ i + </span><span class="s3">&quot; is done&quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">}</span>
         <span class="s1">}</span>
-        <span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s2">34</span><span class="s0">; </span><span class="s1">i &lt; </span><span class="s2">100</span><span class="s0">; </span><span class="s1">i++) {</span>
-            <span class="s1">callback.onDone(</span><span class="s3">&quot;Task &quot; </span><span class="s1">+ i + </span><span class="s3">&quot; is done&quot;</span><span class="s1">)</span><span class="s0">;</span>
-        <span class="s1">}</span>
-    <span class="s1">}</span>
-
-    <span class="s0">public void </span><span class="s1">startError() {</span>
-        <span class="s1">errorCallback.onError(</span><span class="s3">&quot;Task 33 is Error&quot;</span><span class="s1">)</span><span class="s0">;</span>
     <span class="s1">}</span>
 
     <span class="s1">@FunctionalInterface</span>

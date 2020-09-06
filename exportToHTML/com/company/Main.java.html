@@ -20,10 +20,8 @@ Main.java</font>
     <span class="s0">public static void </span><span class="s1">main(String[] args) {</span>
         <span class="s1">Worker.OnTaskDoneListener listener = System.out::println</span><span class="s0">;</span>
         <span class="s1">Worker.OnTaskErrorListener listenerError = System.out::println</span><span class="s0">;</span>
-        <span class="s1">Worker worker = </span><span class="s0">new </span><span class="s1">Worker(listener)</span><span class="s0">;</span>
-        <span class="s1">Worker workerError = </span><span class="s0">new </span><span class="s1">Worker(listenerError)</span><span class="s0">;</span>
+        <span class="s1">Worker worker = </span><span class="s0">new </span><span class="s1">Worker(listener</span><span class="s0">, </span><span class="s1">listenerError)</span><span class="s0">;</span>
         <span class="s1">worker.start()</span><span class="s0">;</span>
-        <span class="s1">workerError.startError()</span><span class="s0">;</span>
     <span class="s1">}</span>
 <span class="s1">}</span>
 </pre>
